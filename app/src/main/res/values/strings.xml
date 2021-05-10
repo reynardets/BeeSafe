@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">BeeSafe</string>
+    <string name="app_name">Bee Safe</string>
+    <string name="beeText">Bee</string>
+    <string name="safeText">Safe</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
