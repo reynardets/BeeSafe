@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "344178297500",
+    "project_id": "beesafe-adc74",
+    "storage_bucket": "beesafe-adc74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344178297500:android:6aa55b6fa5ad2e1a003b59",
+        "android_client_info": {
+          "package_name": "com.example.beesafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344178297500-ulj55d4j0r7maqmav64mq82kqa8gi5kb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkSfDTYKsk8sNLu-bQKJIsLC9r03MwJP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344178297500-ulj55d4j0r7maqmav64mq82kqa8gi5kb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
