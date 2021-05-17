@@ -26,6 +26,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         config()
         binding.btnRegister.setOnClickListener(this)
+        binding.btnLoginRegister.setOnClickListener(this)
     }
 
     private fun config() {

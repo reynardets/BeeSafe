@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.beesafe.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_lapor"
+        android:name="com.example.beesafe.ui.lapor.LaporFragment"
+        android:label="@string/lapor"
+        tools:layout="@layout/fragment_lapor" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.beesafe.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_akun"
+        android:name="com.example.beesafe.ui.akun.AkunFragment"
+        android:label="@string/akun"
+        tools:layout="@layout/fragment_akun" />
 </navigation>

@@ -5,4 +5,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="akun">Akun</string>
+    <string name="lapor">Lapor</string>
+    <string name="selamat_datang_user">Selamat Datang, User</string>
+    <string name="logout">Logout</string>
 </resources>

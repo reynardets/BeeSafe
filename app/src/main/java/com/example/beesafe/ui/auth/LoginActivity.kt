@@ -10,6 +10,7 @@ import com.example.beesafe.R
 import com.example.beesafe.databinding.ActivityLoginBinding
 import com.example.beesafe.utils.SharedPref
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -37,17 +38,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.btn_login->{
+            R.id.btn_login-> {
                 val email = binding.etEmailLogin.text.toString()
                 val password = binding.etPasswordLogin.text.toString()
-
-                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener{
-                    if(it.isSuccessful){
-                        Toast.makeText(this, "Sign In Sucessful", Toast.LENGTH_SHORT).show()
-                        onAuthSuccessful(email)
-                    }else {
-                        Toast.makeText(this, "Sign In Gagal", Toast.LENGTH_SHORT).show()
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Toast.makeText(this, "Sign In Sucessful", Toast.LENGTH_SHORT).show()
+                            onAuthSuccessful(email)
+                            val user = mAuth.currentUser
+                        } else {
+                            Toast.makeText(this, "Sign In Gagal", Toast.LENGTH_SHORT).show()
+                        }
                     }
+                }else{
+                    Toast.makeText(this, "Email dan Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
                 }
             }
             R.id.txt_Register->{
@@ -65,6 +70,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     pref.saveUser(email,noHp)
                 }
                 startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
             .addOnFailureListener{
                 Toast.makeText(this, "Sign In Gagal, $it", Toast.LENGTH_SHORT).show()
