@@ -7,6 +7,11 @@
     <string name="title_notifications">Notifications</string>
     <string name="akun">Akun</string>
     <string name="lapor">Lapor</string>
+    <string name="email">Email</string>
     <string name="selamat_datang_user">Selamat Datang, User</string>
     <string name="logout">Logout</string>
+    <string name="login">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="goToRegister">Tidak punya akun?</string>
+    <string name="daftarIntent"><u>Daftar</u></string>
 </resources>
