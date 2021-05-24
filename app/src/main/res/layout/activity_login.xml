@@ -30,7 +30,7 @@
         android:fontFamily="@font/lato_semibold"
         android:text="@string/email"
         android:textColor="@color/dark_orange"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_login" />
 
@@ -44,10 +44,13 @@
         android:background="@drawable/edit_text"
         android:elevation="12dp"
         android:inputType="textEmailAddress"
-        android:paddingStart="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:fontFamily="@font/lato_regular"
         android:textSize="18sp"
+        android:autofillHints="@string/emailExample"
+        android:hint="@string/emailExample"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_email_login" />
@@ -61,7 +64,7 @@
         android:fontFamily="@font/lato_semibold"
         android:text="@string/password"
         android:textColor="@color/dark_orange"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email_login" />
 
@@ -75,8 +78,11 @@
         android:background="@drawable/edit_text"
         android:elevation="12dp"
         android:inputType="textPassword"
+        android:autofillHints="@string/password"
+        android:hint="@string/password"
         android:fontFamily="@font/lato_regular"
-        android:paddingStart="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +96,7 @@
         android:layout_marginTop="120dp"
         android:layout_marginEnd="46dp"
         android:background="@drawable/edit_text"
-        android:text="Login"
+        android:text="@string/login"
         android:backgroundTint="@color/dark_orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
+            android:textSize="18sp"
             android:fontFamily="@font/lato_semibold"
             android:text="@string/goToRegister"
             android:textColor="@color/dark_orange" />
@@ -124,7 +131,9 @@
             android:fontFamily="@font/lato_semibold"
             android:textColor="@color/dark_orange"
             android:onClick="onClick"
-            android:clickable="true"/>
+            android:textSize="18sp"
+            android:clickable="true"
+            android:focusable="auto"/>
 
     </LinearLayout>
 

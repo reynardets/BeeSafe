@@ -10,15 +10,14 @@ import com.example.beesafe.R
 import com.example.beesafe.databinding.ActivityLoginBinding
 import com.example.beesafe.utils.SharedPref
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding : ActivityLoginBinding
-    lateinit var mAuth : FirebaseAuth
-    lateinit var db : FirebaseFirestore
-    lateinit var pref : SharedPref
+    private lateinit var mAuth : FirebaseAuth
+    private lateinit var db : FirebaseFirestore
+    private lateinit var pref : SharedPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +43,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 if (email.isNotEmpty() && password.isNotEmpty()) {
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            Toast.makeText(this, "Sign In Sucessful", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Sign In Berhasil", Toast.LENGTH_SHORT).show()
                             onAuthSuccessful(email)
                             val user = mAuth.currentUser
                         } else {

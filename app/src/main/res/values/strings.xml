@@ -5,13 +5,25 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <!--Isi dari App -->
     <string name="akun">Akun</string>
     <string name="lapor">Lapor</string>
     <string name="email">Email</string>
+    <!--Example-->
+    <string name="emailExample">BeeSafe@example.com</string>
+    <string name="passwordExample">password</string>
+    <string name="numberExample">08xxxxxxxx</string>
+    <!--Untuk Login-->
     <string name="selamat_datang_user">Selamat Datang, User</string>
     <string name="logout">Logout</string>
-    <string name="login">LOGIN</string>
+    <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="goToRegister">Tidak punya akun?</string>
     <string name="daftarIntent"><u>Daftar</u></string>
+    <!--Untuk Daftar-->
+    <string name="Daftar">Daftar</string>
+    <string name="masukIntent"><u>Masuk</u></string>
+    <string name="gotoLogin">Sudah punya akun?</string>
+    <string name="syaratketentuan">Dengan menekal tombol daftar, anda menyetujui <u>Syarat dan Ketentuan</u></string>
+    <string name="nomorHp">No. Handphone</string>
 </resources>
