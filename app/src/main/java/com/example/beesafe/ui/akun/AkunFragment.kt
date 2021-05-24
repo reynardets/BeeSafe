@@ -12,13 +12,17 @@ import com.example.beesafe.databinding.FragmentAkunBinding
 import com.example.beesafe.ui.auth.LoginActivity
 import com.example.beesafe.utils.SharedPref
 
-class AkunFragment : Fragment(), View.OnClickListener{
+class AkunFragment : Fragment(), View.OnClickListener {
 
     private lateinit var akunViewModel: AkunViewModel
-    private lateinit var binding : FragmentAkunBinding
-    private lateinit var pref : SharedPref
+    private lateinit var binding: FragmentAkunBinding
+    private lateinit var pref: SharedPref
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentAkunBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -35,8 +39,8 @@ class AkunFragment : Fragment(), View.OnClickListener{
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.btn_logout ->{
+        when (v?.id) {
+            R.id.btn_logout -> {
                 pref.clearUser()
                 startActivity(Intent(view?.context, LoginActivity::class.java))
                 activity?.finish()

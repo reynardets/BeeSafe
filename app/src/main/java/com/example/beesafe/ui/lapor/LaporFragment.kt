@@ -14,7 +14,11 @@ class LaporFragment : Fragment() {
 
     private lateinit var laporViewModel: LaporViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         laporViewModel = ViewModelProvider(this).get(LaporViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_lapor, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)

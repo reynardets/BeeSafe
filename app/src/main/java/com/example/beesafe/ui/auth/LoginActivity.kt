@@ -2,17 +2,10 @@ package com.example.beesafe.ui.auth
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatActivity
 import com.example.beesafe.MainActivity
 import com.example.beesafe.R
 import com.example.beesafe.databinding.ActivityLoginBinding
@@ -22,10 +15,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var binding : ActivityLoginBinding
-    private lateinit var mAuth : FirebaseAuth
-    private lateinit var db : FirebaseFirestore
-    private lateinit var pref : SharedPref
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+    private lateinit var pref: SharedPref
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +38,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.btn_login-> {
+        when (v?.id) {
+            R.id.btn_login -> {
                 val email = binding.etEmailLogin.text.toString()
                 val password = binding.etPasswordLogin.text.toString()
                 if (email.isNotEmpty() && password.isNotEmpty()) {
@@ -59,28 +52,32 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             Toast.makeText(this, "Sign In Gagal", Toast.LENGTH_SHORT).show()
                         }
                     }
-                }else{
-                    Toast.makeText(this, "Email dan Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Email dan Password Tidak Boleh Kosong",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-            R.id.txt_Register->{
+            R.id.txt_Register -> {
                 startActivity(Intent(this, RegisterActivity::class.java))
             }
         }
     }
 
     private fun onAuthSuccessful(email: String) {
-        db.collection("users").whereEqualTo("email",email).get()
-            .addOnSuccessListener{
+        db.collection("users").whereEqualTo("email", email).get()
+            .addOnSuccessListener {
                 it.documents.forEach { document ->
                     val email = document["email"].toString()
                     val noHp = document["nohp"].toString()
-                    pref.saveUser(email,noHp)
+                    pref.saveUser(email, noHp)
                 }
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 Toast.makeText(this, "Sign In Gagal, $it", Toast.LENGTH_SHORT).show()
             }
     }
