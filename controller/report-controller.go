@@ -5,6 +5,8 @@ import (
 	"beesafe-api/model"
 	"encoding/json"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 var (
@@ -34,4 +36,23 @@ func AddReport(response http.ResponseWriter, request *http.Request) {
 	dao.AddReport(&report)
 	response.WriteHeader(http.StatusOK)
 	json.NewEncoder(response).Encode(report)
+}
+
+func GetReportsByLocation(response http.ResponseWriter, request *http.Request) {
+
+	response.Header().Set("Content-Type", "application/json")
+
+	q := request.URL.Query()
+	response.WriteHeader(http.StatusOK)
+	latitude, _ := strconv.ParseFloat(strings.TrimSpace(q["latitude"][0]), 64)
+	longitude, _ := strconv.ParseFloat(strings.TrimSpace(q["longitude"][0]), 64)
+
+	reports, err := dao.GetReportsByLocation(latitude, longitude, 0.5)
+	if err != nil {
+		response.WriteHeader(http.StatusInternalServerError)
+		response.Write([]byte(`{"error": "Error getting the reports"}`))
+	}
+	response.WriteHeader(http.StatusOK)
+	json.NewEncoder(response).Encode(reports)
+
 }

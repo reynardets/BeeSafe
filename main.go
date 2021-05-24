@@ -17,7 +17,7 @@ func main() {
 		fmt.Fprint(writer, "Hello there , im online !")
 	})
 	router.HandleFunc("/reports", controller.GetReports).Methods("GET")
-	router.HandleFunc("/reports/{location}", controller.GetReports).Methods("GET") //get data by location
+	router.HandleFunc("/reports/{location}", controller.GetReportsByLocation).Methods("GET") //get data by location
 	router.HandleFunc("/report", controller.AddReport).Methods("POST")
 	log.Println("Server listening on port", port)
 	log.Fatalln(http.ListenAndServe(port, router))
