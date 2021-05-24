@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Registrasi">
@@ -31,10 +32,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
             android:fontFamily="@font/lato_semibold"
             android:text="@string/gotoLogin"
             android:textColor="@color/dark_orange"
-            android:layout_marginEnd="4dp"
             android:textSize="18sp" />
 
         <TextView
@@ -69,7 +70,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="46dp"
         android:background="@drawable/edit_text"
-        android:elevation="12dp"
+        android:elevation="8dp"
         android:fontFamily="@font/lato_regular"
         android:inputType="textEmailAddress"
         android:paddingStart="16dp"
@@ -103,7 +104,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="46dp"
         android:background="@drawable/edit_text"
-        android:elevation="12dp"
+        android:elevation="8dp"
         android:fontFamily="@font/lato_regular"
         android:hint="@string/numberExample"
         android:autofillHints="@string/numberExample"
@@ -139,7 +140,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="46dp"
         android:background="@drawable/edit_text"
-        android:elevation="12dp"
+        android:elevation="8dp"
         android:fontFamily="@font/lato_regular"
         android:inputType="textPassword"
         android:hint="@string/passwordExample"
@@ -157,13 +158,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
-        android:layout_marginTop="80dp"
         android:layout_marginEnd="46dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/edit_text"
         android:text="@string/Daftar"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_password_registrasi" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -171,6 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
         android:layout_marginEnd="46dp"
+        android:layout_marginBottom="46dp"
         android:fontFamily="@font/lato_regular"
         android:text="@string/syaratketentuan"
         android:textAlignment="center"
@@ -178,8 +180,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

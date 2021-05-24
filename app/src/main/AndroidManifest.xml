@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BeeSafe">
         <activity android:name=".ui.auth.RegisterActivity"/>
-        <activity android:name=".ui.auth.LoginActivity" />
+        <activity android:name=".ui.auth.LoginActivity"/>
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashActivity"

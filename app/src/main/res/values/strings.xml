@@ -20,6 +20,7 @@
     <string name="password">Password</string>
     <string name="goToRegister">Tidak punya akun?</string>
     <string name="daftarIntent"><u>Daftar</u></string>
+    <string name="masuk">Masuk</string>
     <!--Untuk Daftar-->
     <string name="Daftar">Daftar</string>
     <string name="masukIntent"><u>Masuk</u></string>

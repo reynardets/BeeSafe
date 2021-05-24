@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/lato_semibold"
         android:text="@string/email"
         android:textColor="@color/dark_orange"
@@ -42,7 +42,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="46dp"
         android:background="@drawable/edit_text"
-        android:elevation="12dp"
+        android:elevation="8dp"
         android:inputType="textEmailAddress"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email_login" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/et_password_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="46dp"
         android:background="@drawable/edit_text"
-        android:elevation="12dp"
+        android:elevation="8dp"
         android:inputType="textPassword"
         android:autofillHints="@string/password"
         android:hint="@string/password"
@@ -93,14 +93,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
-        android:layout_marginTop="120dp"
         android:layout_marginEnd="46dp"
+        android:layout_marginBottom="64dp"
         android:background="@drawable/edit_text"
-        android:text="@string/login"
         android:backgroundTint="@color/dark_orange"
+        android:text="@string/masuk"
+        app:layout_constraintBottom_toTopOf="@+id/goToRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_password_login" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/goToRegister"
@@ -108,37 +108,33 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="46dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:textSize="18sp"
             android:fontFamily="@font/lato_semibold"
             android:text="@string/goToRegister"
-            android:textColor="@color/dark_orange" />
+            android:textColor="@color/dark_orange"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/txt_Register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/daftarIntent"
-            android:fontFamily="@font/lato_semibold"
-            android:textColor="@color/dark_orange"
-            android:onClick="onClick"
-            android:textSize="18sp"
             android:clickable="true"
-            android:focusable="auto"/>
+            android:focusable="auto"
+            android:fontFamily="@font/lato_semibold"
+            android:onClick="onClick"
+            android:text="@string/daftarIntent"
+            android:textColor="@color/dark_orange"
+            android:textSize="18sp" />
 
     </LinearLayout>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

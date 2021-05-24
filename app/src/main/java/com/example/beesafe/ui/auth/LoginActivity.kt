@@ -1,10 +1,18 @@
 package com.example.beesafe.ui.auth
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.example.beesafe.MainActivity
 import com.example.beesafe.R
 import com.example.beesafe.databinding.ActivityLoginBinding
@@ -19,6 +27,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var db : FirebaseFirestore
     private lateinit var pref : SharedPref
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
