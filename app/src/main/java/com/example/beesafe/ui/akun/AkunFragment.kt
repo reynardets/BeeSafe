@@ -18,11 +18,7 @@ class AkunFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentAkunBinding
     private lateinit var pref: SharedPref
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAkunBinding.inflate(layoutInflater)
         return binding.root
     }
