@@ -11,11 +11,11 @@ interface APIEndpoint {
     fun postReports(@Body reports : Reports) : Call<Reports>
 
     @GET("/reports")
-    fun getReports() : Call<ArrayList<ReportsResponse>>
+    fun getReports() : Call<List<ReportsResponse>>
 
-    @GET("/reports/location?latitude={latitude}&longitude={longitude}")
+    @GET("/reports/location")
     fun getNearbyReports(
-            @Path("latitude") latitude : String,
-            @Path("longitude") longitude : String
-    ) : Call<ArrayList<ReportsResponse>>
+            @Query("latitude") latitude : String,
+            @Query("longitude") longitude : String
+    ) : Call<List<ReportsResponse>>
 }
