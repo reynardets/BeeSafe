@@ -8,14 +8,12 @@ from six import u
 
 app = FastAPI()
 
-
 # Use the credentials service account
 cred = credentials.Certificate('credentials.json')
 firebase_admin.initialize_app(cred)
 
 #create client
 db = firestore.client()
-
 
 
 class Report(BaseModel):
@@ -25,16 +23,6 @@ class Report(BaseModel):
     latitude: float
     longitude: float
     userId: str
-
-
-def retriveReportsFromFirebase():
-    doc_ref = db.collection(u'reports')
-    docs = doc_ref.stream()
-
-    data = [];
-    for doc in docs:
-        data.append(doc.to_dict())
-    return data;
 
 
 #Http route
@@ -58,7 +46,12 @@ def createNewReport(request: Report):
 
 @app.get("/reports")
 def getReports():
-    data = retriveReportsFromFirebase()
+    doc_ref = db.collection(u'reports')
+    docs = doc_ref.stream()
+
+    data = [];
+    for doc in docs:
+        data.append(doc.to_dict())
     return {"message":"success","data":data}
 
 @app.get("/reports/location")
@@ -82,7 +75,7 @@ def getReportsByLocation(latitude:float, longitude:float):
     docs = doc_ref.stream()
 
     data = [];
-    
+
     for doc in docs:
         data.append(doc.to_dict())
 
