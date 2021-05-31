@@ -2,7 +2,7 @@ package com.example.beesafe.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.beesafe.Model.User
+import com.example.beesafe.model.User
 
 class SharedPref(context: Context) {
 

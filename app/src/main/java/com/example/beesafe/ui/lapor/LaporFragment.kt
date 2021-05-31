@@ -1,6 +1,7 @@
 package com.example.beesafe.ui.lapor
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.example.beesafe.Model.Reports
+import com.example.beesafe.model.Reports
 import com.example.beesafe.R
 import com.example.beesafe.api.APIConfig
 import com.example.beesafe.databinding.FragmentLaporBinding
@@ -52,6 +53,7 @@ class LaporFragment : Fragment(), View.OnClickListener {
         laporViewModel = LaporViewModel()
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLatLong() {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -70,15 +72,12 @@ class LaporFragment : Fragment(), View.OnClickListener {
             R.id.btn_lapor ->{
                 //Temporary Category
                 val category = ""
-
                 //get Current Date
                 val sdf = SimpleDateFormat("dd/M/yyyy hh:mm")
                 val currentDate = sdf.format(Date())
                 binding.tvTanggal.text = currentDate
-
                 //Deskripsi
                 val description = binding.etDeskripsi.text.toString()
-
                 //get UID
                 val userID = mAuth.currentUser?.uid.toString()
 
@@ -88,14 +87,15 @@ class LaporFragment : Fragment(), View.OnClickListener {
     }
 
     private fun postLapor(category: String, currentDate: String, description: String, userID: String, latitude: String, longitude: String) {
-        val reports = Reports(category,currentDate,description,userID,latitude,longitude)
+        val reports = Reports(category,currentDate,description,latitude,longitude,userID)
         val client = APIConfig.getAPIService().postReports(reports)
         client.enqueue(object : Callback<Reports>{
             override fun onFailure(call: Call<Reports>, t: Throwable) {
                 Toast.makeText(requireContext(), "Gagal", Toast.LENGTH_SHORT).show()
             }
             override fun onResponse(call: Call<Reports>, response: Response<Reports>) {
-                Toast.makeText(requireContext(), "status = ${response.message()}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Laporan Berhasil Dikirim", Toast.LENGTH_SHORT).show()
+                binding.etDeskripsi.setText("")
             }
         })
     }

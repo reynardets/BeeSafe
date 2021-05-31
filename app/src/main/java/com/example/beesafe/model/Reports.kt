@@ -1,10 +1,10 @@
-package com.example.beesafe.Model.Remote
+package com.example.beesafe.model
 
-data class ReportsResponse (
+data class Reports(
         var category : String = "",
         var datetime : String = "",
         var description : String = "",
-        var userId : String = "",
         var latitude : String = "",
-        var longitude : String = ""
+        var longitude : String = "",
+        var userId : String = ""
 )

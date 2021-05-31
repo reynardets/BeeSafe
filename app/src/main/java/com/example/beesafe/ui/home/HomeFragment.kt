@@ -1,15 +1,16 @@
 package com.example.beesafe.ui.home
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.beesafe.Model.Remote.ReportsResponse
 import com.example.beesafe.api.APIConfig
 import com.example.beesafe.databinding.FragmentHomeBinding
+import com.example.beesafe.model.remote.APIResponse
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -59,12 +60,11 @@ class HomeFragment : Fragment(){
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 val position = LatLng(location.latitude ,location.longitude)
                 // For dropping a marker at a point on the Map
-                googleMap.addMarker(
-                        MarkerOptions().position(position).title("Marker Title")
+                googleMap.addMarker(MarkerOptions().position(position).title("Marker Title")
                                 .snippet("Marker Description")
                 )
                 // For zooming automatically to the location of the marker
-                val cameraPosition = CameraPosition.Builder().target(position).zoom(12f).build()
+                val cameraPosition = CameraPosition.Builder().target(position).zoom(15f).build()
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
         }
@@ -72,17 +72,26 @@ class HomeFragment : Fragment(){
 
     private fun getReports() {
         val client = APIConfig.getAPIService().getReports()
-        client.enqueue(object : Callback<List<ReportsResponse>> {
-            override fun onFailure(call: Call<List<ReportsResponse>>, t: Throwable) {
+        client.enqueue(object : Callback<APIResponse> {
+            override fun onFailure(call: Call<APIResponse>, t: Throwable) {
                 Toast.makeText(requireContext(), "${t.message}", Toast.LENGTH_SHORT).show()
             }
-            override fun onResponse(call: Call<List<ReportsResponse>>, response: Response<List<ReportsResponse>>) {
+            override fun onResponse(call: Call<APIResponse>, response: Response<APIResponse>) {
                 val arrayResponse = response.body()
-                if (arrayResponse != null) {
-                    for(reports in arrayResponse){
+                if(arrayResponse != null){
+                    for (reports in arrayResponse.data){
+                        //give color based on category
+                        var circleColor = Color.TRANSPARENT
+                        when(reports.category){
+                            "category 1" -> circleColor = Color.GREEN
+                            "category 2" -> circleColor = Color.YELLOW
+                            "category 3" -> circleColor = Color.RED
+                        }
+                        //Drawing Circle
                         val circleOptions = CircleOptions()
-                                .center(LatLng(reports.latitude.toDouble(), reports.longitude.toDouble()))
+                                .center(LatLng(reports.location.latitude, reports.location.longitude))
                                 .radius(100.0)
+                                .fillColor(circleColor)
                         googleMap.addCircle(circleOptions)
                     }
                 }
