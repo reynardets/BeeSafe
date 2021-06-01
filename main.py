@@ -9,8 +9,6 @@ import requests
 import json
 
 
-
-
 app = FastAPI()
 
 # Use the credentials service account
@@ -32,8 +30,7 @@ class Report(BaseModel):
 
 def getCategory(desc):
     url = 'http://34.101.97.194:8008/predict'
-    kalimat = "Ada yang menyentuh ku saat aku lagi naik bus kota"
-    body =  {"kalimat": kalimat}
+    body =  {"kalimat": desc}
 
     req = requests.post(url,data=json.dumps(body))
 
