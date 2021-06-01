@@ -44,13 +44,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     mAuth.createUserWithEmailAndPassword(email, pass)
                         .addOnCompleteListener(this, OnCompleteListener { task ->
-                            Toast.makeText(
-                                this,
-                                "createUserWithEmail:onComplete" + task.isSuccessful,
-                                Toast.LENGTH_SHORT
-                            ).show()
                             if (!task.isSuccessful) {
-                                Toast.makeText(this, "User Not crated", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "User Gagal Dibuat", Toast.LENGTH_SHORT).show()
                                 return@OnCompleteListener
                             } else {
                                 val newUser = hashMapOf(
@@ -68,6 +63,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                                     .addOnFailureListener {
                                         Log.e("register", "Registrasi gagal, ${it.message}")
                                     }
+                                Toast.makeText(this, "User Berhasil Dibuat", Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this, LoginActivity::class.java))
                                 finish()
                             }
