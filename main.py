@@ -44,7 +44,7 @@ def read_root():
 @app.post("/report")
 def createNewReport(request: Report):
     data = {
-        "category":getCategory(request.category),
+        "category":getCategory(request.description),
         "datetime":request.datetime,
         "description":request.description,
         "location":firestore.GeoPoint(request.latitude,request.longitude),
