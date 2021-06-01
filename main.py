@@ -5,6 +5,11 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from six import u
+import requests
+import json
+
+
+
 
 app = FastAPI()
 
@@ -25,8 +30,16 @@ class Report(BaseModel):
     userId: str
 
 
-#Http route
+def getCategory(desc):
+    url = 'http://34.101.97.194:8008/predict'
+    kalimat = "Ada yang menyentuh ku saat aku lagi naik bus kota"
+    body =  {"kalimat": kalimat}
 
+    req = requests.post(url,data=json.dumps(body))
+
+    return req.json()["data"]
+
+#Http route
 @app.get("/")
 def read_root():
     return {"message": "Hello, Im online"}
@@ -34,7 +47,7 @@ def read_root():
 @app.post("/report")
 def createNewReport(request: Report):
     data = {
-        "category":request.category,
+        "category":getCategory(request.category),
         "datetime":request.datetime,
         "description":request.description,
         "location":firestore.GeoPoint(request.latitude,request.longitude),
