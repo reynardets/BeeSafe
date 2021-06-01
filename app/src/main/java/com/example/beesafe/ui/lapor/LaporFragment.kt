@@ -2,12 +2,16 @@ package com.example.beesafe.ui.lapor
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.beesafe.model.Reports
@@ -24,7 +28,7 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LaporFragment : Fragment(), View.OnClickListener {
+class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateSetListener   {
 
     private lateinit var binding: FragmentLaporBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -45,6 +49,7 @@ class LaporFragment : Fragment(), View.OnClickListener {
         config()
         getLatLong()
         binding.btnLapor.setOnClickListener(this)
+        binding.btnSettanggal.setOnClickListener(this)
     }
 
     private fun config() {
@@ -67,14 +72,26 @@ class LaporFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onClick(v: View?) {
         when(v?.id){
+            R.id.btn_settanggal->{
+                val calendar = Calendar.getInstance()
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+                val month = calendar.get(Calendar.MONTH)
+                val year = calendar.get(Calendar.YEAR)
+                val datePickerDialog = DatePickerDialog(requireContext(),this, year, month,day)
+                datePickerDialog.show()
+            }
             R.id.btn_lapor ->{
                 //Temporary Category
                 val category = ""
                 //get Current Date
-                val sdf = SimpleDateFormat("dd/M/yyyy hh:mm")
-                val currentDate = sdf.format(Date())
+                var currentDate = binding.tvTanggal.text.toString()
+                if(currentDate == ""){
+                    val sdf = SimpleDateFormat("dd/M/yyyy")
+                    currentDate = sdf.format(Date())
+                }
                 binding.tvTanggal.text = currentDate
                 //Deskripsi
                 val description = binding.etDeskripsi.text.toString()
@@ -98,5 +115,10 @@ class LaporFragment : Fragment(), View.OnClickListener {
                 binding.etDeskripsi.setText("")
             }
         })
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        val date = "${dayOfMonth}/${month}/${year}"
+        binding.tvTanggal.text = date
     }
 }
