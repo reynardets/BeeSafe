@@ -1,9 +1,7 @@
 package com.example.beesafe.ui.lapor
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.content.pm.PackageManager
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,12 +10,12 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.beesafe.R
 import com.example.beesafe.api.APIConfig
 import com.example.beesafe.databinding.FragmentLaporBinding
 import com.example.beesafe.model.Reports
+import com.example.beesafe.ui.auth.LoginActivity
 import com.example.beesafe.utils.SharedPref
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -50,9 +48,9 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         config()
-        getLatLong()
         binding.btnLapor.setOnClickListener(this)
         binding.tvTanggal.setOnClickListener(this)
+        binding.etLokasi.setOnClickListener(this)
     }
 
     private fun config() {
@@ -61,30 +59,12 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
         laporViewModel = LaporViewModel()
     }
 
-    @SuppressLint("MissingPermission")
-    private fun getLatLong() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
-        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            if (location != null) {
-                latitude = location.latitude.toString()
-                longitude = location.longitude.toString()
-            }
-        }
-    }
-
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.et_lokasi ->{
+                startActivity(Intent(view?.context, LocationActivity::class.java))
+        }
             R.id.tv_tanggal -> {
                 val calendar = Calendar.getInstance()
                 val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -111,6 +91,9 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
                     ).show()
                     return
                 }
+                //get Lat-Long from SharedPref
+                latitude = pref.getLatitude().toString()
+                longitude = pref.getLongitude().toString()
                 //Temporary Category
                 val category = ""
                 //get Current Date
@@ -119,7 +102,6 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
                 val description = binding.etDeskripsi.text.toString()
                 //get UID
                 val userID = mAuth.currentUser?.uid.toString()
-
                 postLapor(category, currentDate, description, userID, latitude, longitude)
             }
         }
@@ -152,5 +134,10 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
         val monthNew = month + 1
         val date = "${dayOfMonth}/${monthNew}/${year}"
         binding.tvTanggal.text = date
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.etLokasi.text = pref.getAddress()
     }
 }

@@ -13,6 +13,7 @@ import com.example.beesafe.R
 import com.example.beesafe.api.APIConfig
 import com.example.beesafe.databinding.FragmentHomeBinding
 import com.example.beesafe.model.remote.APIResponse
+import com.example.beesafe.utils.SharedPref
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +34,7 @@ class HomeFragment : Fragment() {
     private lateinit var mMapView: MapView
     private lateinit var googleMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var pref : SharedPref
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +47,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pref = SharedPref(requireContext())
         showGMaps(savedInstanceState)
     }
 
@@ -63,10 +67,11 @@ class HomeFragment : Fragment() {
             // For showing a move to my location button
             googleMap.setMyLocationEnabled(true)
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                pref.setLocation(location.latitude.toFloat(), location.longitude.toFloat())
 
                 getNearbyReports(location.latitude, location.longitude)
-                val position = LatLng(location.latitude, location.longitude)
 
+                val position = LatLng(location.latitude, location.longitude)
                 // For zooming automatically to the location of the marker
                 val cameraPosition = CameraPosition.Builder().target(position).zoom(15f).build()
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))

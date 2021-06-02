@@ -9,4 +9,7 @@ class Constant {
     val sessionEmail = "email"
     val sessionNoHp = "nohp"
     val session_isLogin = "isLogin"
+    val latitude = "latitude"
+    val longitude = "longitude"
+    val address = "address"
 }
