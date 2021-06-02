@@ -84,15 +84,19 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
                 datePickerDialog.show()
             }
             R.id.btn_lapor ->{
+                //Cek Field
+                if(binding.tvTanggal.text == ""){
+                    Toast.makeText(requireContext(), "Tanggal tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
+                    return
+                }
+                if(binding.etDeskripsi.text.isEmpty()){
+                    Toast.makeText(requireContext(), "Deskripsi kejadian tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
+                    return
+                }
                 //Temporary Category
                 val category = ""
                 //get Current Date
                 var currentDate = binding.tvTanggal.text.toString()
-                if(currentDate == ""){
-                    val sdf = SimpleDateFormat("dd/M/yyyy")
-                    currentDate = sdf.format(Date())
-                }
-                binding.tvTanggal.text = currentDate
                 //Deskripsi
                 val description = binding.etDeskripsi.text.toString()
                 //get UID
