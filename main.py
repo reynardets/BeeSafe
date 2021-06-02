@@ -7,6 +7,8 @@ from firebase_admin import firestore
 from six import u
 import requests
 import json
+from datetime import datetime, timedelta, timezone
+from google.api_core.datetime_helpers import DatetimeWithNanoseconds
 
 
 app = FastAPI()
@@ -45,7 +47,7 @@ def read_root():
 def createNewReport(request: Report):
     data = {
         "category":getCategory(request.description),
-        "datetime":request.datetime,
+        "datetime":datetime.strptime(request.datetime, '%d/%m/%Y'),
         "description":request.description,
         "location":firestore.GeoPoint(request.latitude,request.longitude),
         "userId":request.userId
@@ -81,13 +83,22 @@ def getReportsByLocation(latitude:float, longitude:float):
     lesserGeoPoint = firestore.GeoPoint(lowerLat,lowerLong)
     greaterGeoPoint = firestore.GeoPoint(greaterLat,greaterLong)
 
+    #make a datetime now and a week before
+    today = datetime.now()
+    week_ago = today - timedelta(days=7)
+
     doc_ref = db.collection(u'reports').where(u'location', u'>=',lesserGeoPoint).where(u'location',u'<=',greaterGeoPoint)
     docs = doc_ref.stream()
 
     data = [];
 
     for doc in docs:
-        data.append(doc.to_dict())
+        #make DatetimeWithNanoseconds from datetime.datetime 
+        today_DTM = DatetimeWithNanoseconds(today.year,today.month, today.day,0,0,tzinfo=timezone.utc)
+        week_ago_DTM = DatetimeWithNanoseconds(week_ago.year,week_ago.month, week_ago.day,0,0,tzinfo=timezone.utc)
+        
+        if(doc.to_dict()["datetime"] >= week_ago_DTM and doc.to_dict()["datetime"] <= today_DTM):
+            data.append(doc.to_dict())
 
     return {"message":"success","data":data}
 
