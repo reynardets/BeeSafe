@@ -33,4 +33,6 @@
     <string name="date">dd/mm/yyyy</string>
     <string name="deskripsi">Deskripsi</string>
     <string name="deskripsi_text">Ini adalah deskripsi</string>
+    <string name="lokasi">Lokasi</string>
+    <string name="lokasi_example">Jl. Mawar Merah no. 50</string>
 </resources>
