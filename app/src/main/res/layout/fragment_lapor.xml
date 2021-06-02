@@ -10,20 +10,24 @@
         android:id="@+id/txt_tanggal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
-        android:text="Tanggal"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/lato_semibold"
+        android:text="@string/Tanggal"
+        android:textColor="@color/dark_orange"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_settanggal" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_deskripsi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="45dp"
+        android:fontFamily="@font/lato_semibold"
         android:text="@string/deskripsi"
+        android:textColor="@color/dark_orange"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_tanggal" />
@@ -32,24 +36,33 @@
         android:id="@+id/et_deskripsi"
         android:layout_width="0dp"
         android:layout_height="226dp"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="@string/deskripsi"
+        android:background="@drawable/lapor_text"
+        android:backgroundTint="@color/darker_white"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="@string/deskripsi_text"
         android:inputType="textMultiLine"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_deskripsi"
-        android:autofillHints="@string/deskripsi" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_deskripsi" />
 
     <Button
         android:id="@+id/btn_lapor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="162dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/edit_text"
         android:text="@string/lapor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -58,22 +71,29 @@
 
     <TextView
         android:id="@+id/tv_tanggal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:hint="dd/M/yyyy"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/lapor_text"
+        android:backgroundTint="@color/darker_white"
+        android:fontFamily="@font/lato_regular"
+        android:gravity="center_vertical"
+        android:hint="@string/date"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_tanggal" />
 
-    <Button
-        android:id="@+id/btn_settanggal"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="93dp"
-        android:text="Set Tanggal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

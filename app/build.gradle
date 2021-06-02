@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [api_key:"AIzaSyAn9IUoU7YUx1ynAiEED8cDmyBls56eG6s"]
+        manifestPlaceholders = [api_key: "AIzaSyAn9IUoU7YUx1ynAiEED8cDmyBls56eG6s"]
     }
 
     buildFeatures {

@@ -27,6 +27,10 @@
     <string name="gotoLogin">Sudah punya akun?</string>
     <string name="syaratketentuan">Dengan menekal tombol daftar, anda menyetujui <u>Syarat dan Ketentuan</u></string>
     <string name="nomorHp">No. Handphone</string>
-    <string name="deskripsi">Deskripsi</string>
     <string name="title_activity_maps">Map</string>
+    <!--Untuk Lapor-->
+    <string name="Tanggal">Tanggal</string>
+    <string name="date">dd/mm/yyyy</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="deskripsi_text">Ini adalah deskripsi</string>
 </resources>

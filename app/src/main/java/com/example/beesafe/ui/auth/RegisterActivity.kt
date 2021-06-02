@@ -63,7 +63,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                                     .addOnFailureListener {
                                         Log.e("register", "Registrasi gagal, ${it.message}")
                                     }
-                                Toast.makeText(this, "User Berhasil Dibuat", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "User Berhasil Dibuat", Toast.LENGTH_SHORT)
+                                    .show()
                                 startActivity(Intent(this, LoginActivity::class.java))
                                 finish()
                             }

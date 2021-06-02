@@ -14,10 +14,10 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.example.beesafe.model.Reports
 import com.example.beesafe.R
 import com.example.beesafe.api.APIConfig
 import com.example.beesafe.databinding.FragmentLaporBinding
+import com.example.beesafe.model.Reports
 import com.example.beesafe.utils.SharedPref
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -25,20 +25,23 @@ import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.util.*
 
-class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateSetListener   {
+class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: FragmentLaporBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var pref: SharedPref
-    private lateinit var mAuth : FirebaseAuth
+    private lateinit var mAuth: FirebaseAuth
     private lateinit var laporViewModel: LaporViewModel
     private var latitude = ""
     private var longitude = ""
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentLaporBinding.inflate(layoutInflater)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         return binding.root
@@ -49,7 +52,7 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
         config()
         getLatLong()
         binding.btnLapor.setOnClickListener(this)
-        binding.btnSettanggal.setOnClickListener(this)
+        binding.tvTanggal.setOnClickListener(this)
     }
 
     private fun config() {
@@ -60,8 +63,15 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
 
     @SuppressLint("MissingPermission")
     private fun getLatLong() {
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
@@ -74,23 +84,31 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.btn_settanggal->{
+        when (v?.id) {
+            R.id.tv_tanggal -> {
                 val calendar = Calendar.getInstance()
                 val day = calendar.get(Calendar.DAY_OF_MONTH)
                 val month = calendar.get(Calendar.MONTH)
                 val year = calendar.get(Calendar.YEAR)
-                val datePickerDialog = DatePickerDialog(requireContext(),this, year, month,day)
+                val datePickerDialog = DatePickerDialog(requireContext(), this, year, month, day)
                 datePickerDialog.show()
             }
-            R.id.btn_lapor ->{
+            R.id.btn_lapor -> {
                 //Cek Field
-                if(binding.tvTanggal.text == ""){
-                    Toast.makeText(requireContext(), "Tanggal tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
+                if (binding.tvTanggal.text == "") {
+                    Toast.makeText(
+                        requireContext(),
+                        "Tanggal tidak Boleh Kosong",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return
                 }
-                if(binding.etDeskripsi.text.isEmpty()){
-                    Toast.makeText(requireContext(), "Deskripsi kejadian tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
+                if (binding.etDeskripsi.text.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Deskripsi kejadian tidak Boleh Kosong",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return
                 }
                 //Temporary Category
@@ -102,27 +120,37 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
                 //get UID
                 val userID = mAuth.currentUser?.uid.toString()
 
-                postLapor(category,currentDate,description,userID,latitude,longitude)
+                postLapor(category, currentDate, description, userID, latitude, longitude)
             }
         }
     }
 
-    private fun postLapor(category: String, currentDate: String, description: String, userID: String, latitude: String, longitude: String) {
-        val reports = Reports(category,currentDate,description,latitude,longitude,userID)
+    private fun postLapor(
+        category: String,
+        currentDate: String,
+        description: String,
+        userID: String,
+        latitude: String,
+        longitude: String
+    ) {
+        val reports = Reports(category, currentDate, description, latitude, longitude, userID)
         val client = APIConfig.getAPIService().postReports(reports)
-        client.enqueue(object : Callback<Reports>{
+        client.enqueue(object : Callback<Reports> {
             override fun onFailure(call: Call<Reports>, t: Throwable) {
                 Toast.makeText(requireContext(), "Gagal", Toast.LENGTH_SHORT).show()
             }
+
             override fun onResponse(call: Call<Reports>, response: Response<Reports>) {
-                Toast.makeText(requireContext(), "Laporan Berhasil Dikirim", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Laporan Berhasil Dikirim", Toast.LENGTH_SHORT)
+                    .show()
                 binding.etDeskripsi.setText("")
             }
         })
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        val date = "${dayOfMonth}/${month}/${year}"
+        val monthNew = month + 1
+        val date = "${dayOfMonth}/${monthNew}/${year}"
         binding.tvTanggal.text = date
     }
 }
