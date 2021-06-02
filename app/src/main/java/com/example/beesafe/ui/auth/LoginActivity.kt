@@ -36,18 +36,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnLogin.setOnClickListener(this)
         binding.txtRegister.setOnClickListener(this)
 
-        if (ContextCompat.checkSelfPermission(this@LoginActivity,
-                Manifest.permission.ACCESS_FINE_LOCATION) !==
-            PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this@LoginActivity,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-                ActivityCompat.requestPermissions(this@LoginActivity,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
-            } else {
-                ActivityCompat.requestPermissions(this@LoginActivity,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
-            }
-        }
     }
 
     private fun config() {
@@ -103,21 +91,5 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
-                                            grantResults: IntArray) {
-        when (requestCode) {
-            1 -> {
-                if (grantResults.isNotEmpty() && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED) {
-                    if ((ContextCompat.checkSelfPermission(this@LoginActivity,
-                            Manifest.permission.ACCESS_FINE_LOCATION) ===  PackageManager.PERMISSION_GRANTED)) {
-                        Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
-                }
-                return
-            }
-        }
-    }
+
 }

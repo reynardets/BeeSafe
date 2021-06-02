@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
         mMapView.getMapAsync { mMap ->
             googleMap = mMap
             // For showing a move to my location button
-            //googleMap.setMyLocationEnabled(true)
+            googleMap.setMyLocationEnabled(true)
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
 
                 getNearbyReports(location.latitude, location.longitude)

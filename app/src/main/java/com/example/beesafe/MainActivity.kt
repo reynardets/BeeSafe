@@ -1,8 +1,12 @@
 package com.example.beesafe
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.beesafe.databinding.ActivityMainBinding
@@ -27,5 +31,7 @@ class MainActivity : AppCompatActivity() {
         val menu = popupMenu.menu
         binding.navView.setupWithNavController(menu, navController)
     }
+
+
 
 }
