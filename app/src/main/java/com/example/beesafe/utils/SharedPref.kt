@@ -30,5 +30,6 @@ class SharedPref(context: Context) {
     fun clearUser() {
         val editor = sharedPref.edit()
         editor.clear()
+        editor.apply()
     }
 }
