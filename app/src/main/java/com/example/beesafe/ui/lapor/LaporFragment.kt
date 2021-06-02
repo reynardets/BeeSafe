@@ -90,7 +90,7 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
                 val day = calendar.get(Calendar.DAY_OF_MONTH)
                 val month = calendar.get(Calendar.MONTH)
                 val year = calendar.get(Calendar.YEAR)
-                val datePickerDialog = DatePickerDialog(requireContext(), this, year, month, day)
+                val datePickerDialog = DatePickerDialog(requireContext(), R.style.DatePickerDialog, this, year, month, day)
                 datePickerDialog.show()
             }
             R.id.btn_lapor -> {

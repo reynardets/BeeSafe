@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize">
+    android:layout_height="match_parent">
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -22,15 +21,13 @@
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
         app:backgroundColor="@color/dark_orange"
-        app:iconSize="30dp"
-        app:itemPadding="12dp"
+        app:iconSize="25dp"
+        app:itemPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu"
-        app:textSize="14sp" />
+        app:textSize="16sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
