@@ -84,7 +84,7 @@ def getReportsByLocation(latitude:float, longitude:float):
     greaterGeoPoint = firestore.GeoPoint(greaterLat,greaterLong)
 
     #make a datetime now and a week before
-    today = datetime.now()
+    today = datetime.now() + timedelta(days=1) #adding + 1 day , to compare with UTC timezone
     week_ago = today - timedelta(days=7)
 
     doc_ref = db.collection(u'reports').where(u'location', u'>=',lesserGeoPoint).where(u'location',u'<=',greaterGeoPoint)
@@ -96,7 +96,7 @@ def getReportsByLocation(latitude:float, longitude:float):
         #make DatetimeWithNanoseconds from datetime.datetime 
         today_DTM = DatetimeWithNanoseconds(today.year,today.month, today.day,0,0,tzinfo=timezone.utc)
         week_ago_DTM = DatetimeWithNanoseconds(week_ago.year,week_ago.month, week_ago.day,0,0,tzinfo=timezone.utc)
-        
+
         if(doc.to_dict()["datetime"] >= week_ago_DTM and doc.to_dict()["datetime"] <= today_DTM):
             data.append(doc.to_dict())
 
