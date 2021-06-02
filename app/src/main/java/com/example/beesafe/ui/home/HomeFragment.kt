@@ -79,22 +79,25 @@ class HomeFragment : Fragment(){
                 val arrayResponse = response.body()
                 if(arrayResponse != null){
                     //Alert Builder
-                    val builder = AlertDialog.Builder(requireContext())
-                    builder.setTitle("Harap Berhati - Hati")
-                    builder.setIcon(R.drawable.ic_warning)
-                    builder.setMessage("Telah terjadi ${arrayResponse.data.size} pelecehan seksual disekitar anda")
-                    builder.setNeutralButton("OK"){ dialog, which ->
+                    if(arrayResponse.data.size > 0) {
+                        val builder = AlertDialog.Builder(requireContext())
+                        builder.setTitle("Harap Berhati - Hati")
+                        builder.setIcon(R.drawable.ic_warning)
+                        builder.setMessage("Telah terjadi ${arrayResponse.data.size} pelecehan seksual disekitar anda")
+                        builder.setNeutralButton("OK") { dialog, which ->
+                        }
+                        val alertDialog = builder.create()
+                        alertDialog.show()
                     }
-                    val alertDialog = builder.create()
-                    alertDialog.show()
+
                     //Looping All the data from API to determine the color of circle
                     for (reports in arrayResponse.data){
                         //give color based on category
                         var circleColor = Color.TRANSPARENT
                         when(reports.category){
-                            "category 1" -> circleColor = Color.GREEN
-                            "category 2" -> circleColor = Color.YELLOW
-                            "category 3" -> circleColor = Color.RED
+                            "Menatap / melihat" -> circleColor = Color.argb(100,100,81,12)
+                            "Komentar" -> circleColor = Color.argb(100,255,165,0)
+                            "Memegang / menyentuh" -> circleColor = Color.argb(100,255,0,0)
                         }
                         //Drawing Circle
                         val circleOptions = CircleOptions()

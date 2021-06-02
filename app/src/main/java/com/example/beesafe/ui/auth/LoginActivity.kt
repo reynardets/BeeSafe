@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         config()
+        isLogin()
         binding.btnLogin.setOnClickListener(this)
         binding.txtRegister.setOnClickListener(this)
     }
@@ -35,6 +36,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
         pref = SharedPref(this)
+    }
+
+    private fun isLogin() {
+        if(pref.getUser().email != ""){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -47,17 +55,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         if (it.isSuccessful) {
                             Toast.makeText(this, "Sign In Berhasil", Toast.LENGTH_SHORT).show()
                             onAuthSuccessful(email)
-                            val user = mAuth.currentUser
                         } else {
                             Toast.makeText(this, "Sign In Gagal", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
-                    Toast.makeText(
-                        this,
-                        "Email dan Password Tidak Boleh Kosong",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Email dan Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
                 }
             }
             R.id.txt_Register -> {
