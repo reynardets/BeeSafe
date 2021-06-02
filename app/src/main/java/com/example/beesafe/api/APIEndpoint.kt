@@ -16,7 +16,7 @@ interface APIEndpoint {
 
     @GET("/reports/location")
     fun getNearbyReports(
-            @Query("latitude") latitude : String,
-            @Query("longitude") longitude : String
+            @Query("latitude") latitude : Double,
+            @Query("longitude") longitude : Double
     ) : Call<APIResponse>
 }

@@ -1,6 +1,7 @@
 package com.example.beesafe.ui.home
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.beesafe.R
 import com.example.beesafe.api.APIConfig
 import com.example.beesafe.databinding.FragmentHomeBinding
 import com.example.beesafe.model.remote.APIResponse
@@ -19,7 +21,6 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +40,6 @@ class HomeFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showGMaps(savedInstanceState)
-        getReports()
     }
 
     @SuppressLint("MissingPermission")
@@ -58,11 +58,10 @@ class HomeFragment : Fragment(){
             // For showing a move to my location button
             googleMap.setMyLocationEnabled(true)
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+
+                getNearbyReports(location.latitude,location.longitude)
                 val position = LatLng(location.latitude ,location.longitude)
-                // For dropping a marker at a point on the Map
-                googleMap.addMarker(MarkerOptions().position(position).title("Marker Title")
-                                .snippet("Marker Description")
-                )
+
                 // For zooming automatically to the location of the marker
                 val cameraPosition = CameraPosition.Builder().target(position).zoom(15f).build()
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
@@ -70,8 +69,8 @@ class HomeFragment : Fragment(){
         }
     }
 
-    private fun getReports() {
-        val client = APIConfig.getAPIService().getReports()
+    private fun getNearbyReports(latitude : Double, longitude : Double) {
+        val client = APIConfig.getAPIService().getNearbyReports(latitude,longitude)
         client.enqueue(object : Callback<APIResponse> {
             override fun onFailure(call: Call<APIResponse>, t: Throwable) {
                 Toast.makeText(requireContext(), "${t.message}", Toast.LENGTH_SHORT).show()
@@ -79,6 +78,16 @@ class HomeFragment : Fragment(){
             override fun onResponse(call: Call<APIResponse>, response: Response<APIResponse>) {
                 val arrayResponse = response.body()
                 if(arrayResponse != null){
+                    //Alert Builder
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setTitle("Harap Berhati - Hati")
+                    builder.setIcon(R.drawable.ic_warning)
+                    builder.setMessage("Telah terjadi ${arrayResponse.data.size} pelecehan seksual disekitar anda")
+                    builder.setNeutralButton("OK"){ dialog, which ->
+                    }
+                    val alertDialog = builder.create()
+                    alertDialog.show()
+                    //Looping All the data from API to determine the color of circle
                     for (reports in arrayResponse.data){
                         //give color based on category
                         var circleColor = Color.TRANSPARENT
