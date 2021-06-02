@@ -75,6 +75,14 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
             }
             R.id.btn_lapor -> {
                 //Cek Field
+                if (binding.etDeskripsi.text.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Lokasi tidak Boleh Kosong",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return
+                }
                 if (binding.tvTanggal.text == "") {
                     Toast.makeText(
                         requireContext(),
@@ -139,5 +147,10 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
     override fun onResume() {
         super.onResume()
         binding.etLokasi.text = pref.getAddress()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        pref.eraseAdress()
     }
 }

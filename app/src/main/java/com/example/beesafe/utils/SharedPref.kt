@@ -34,9 +34,7 @@ class SharedPref(context: Context) {
         editor.apply()
     }
 
-    fun getLatitude() : Float{
-        return sharedPref.getFloat(constant.latitude,0.0F)
-    }
+    fun getLatitude() : Float = sharedPref.getFloat(constant.latitude,0.0F)
 
     fun getLongitude() = sharedPref.getFloat(constant.longitude, 0.0F)
 
@@ -47,6 +45,12 @@ class SharedPref(context: Context) {
     }
 
     fun getAddress() = sharedPref.getString(constant.address, "")
+
+    fun eraseAdress() {
+        val editor = sharedPref.edit()
+        editor.putString(constant.address, "")
+        editor.apply()
+    }
 
     fun clearUser() {
         val editor = sharedPref.edit()

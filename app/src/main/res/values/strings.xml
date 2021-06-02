@@ -14,7 +14,7 @@
     <string name="passwordExample">password</string>
     <string name="numberExample">08xxxxxxxx</string>
     <!--Untuk Login-->
-    <string name="selamat_datang_user">Selamat Datang, User</string>
+    <string name="selamat_datang">Selamat Datang</string>
     <string name="logout">Logout</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
@@ -35,4 +35,5 @@
     <string name="deskripsi_text">Ini adalah deskripsi</string>
     <string name="lokasi">Lokasi</string>
     <string name="lokasi_example">Jl. Mawar Merah no. 50</string>
+    <string name="user">User</string>
 </resources>

@@ -36,6 +36,7 @@ class AkunFragment : Fragment(), View.OnClickListener {
     private fun config() {
         akunViewModel = ViewModelProvider(this).get(AkunViewModel::class.java)
         pref = SharedPref(requireContext())
+        binding.txtUser.text = pref.getUser().email
     }
 
     override fun onClick(v: View?) {

@@ -94,7 +94,7 @@ class HomeFragment : Fragment() {
                         val builder = AlertDialog.Builder(requireContext())
                         builder.setTitle("Harap Berhati - Hati")
                         builder.setIcon(R.drawable.ic_warning)
-                        builder.setMessage("Telah terjadi ${arrayResponse.data.size} pelecehan seksual disekitar anda")
+                        builder.setMessage("Telah terjadi pelecehan seksual disekitar anda")
                         builder.setNeutralButton("OK") { dialog, which ->
                         }
                         val alertDialog = builder.create()
@@ -112,8 +112,9 @@ class HomeFragment : Fragment() {
                         //Drawing Circle
                         val circleOptions = CircleOptions()
                             .center(LatLng(reports.location.latitude, reports.location.longitude))
-                            .radius(100.0)
+                            .radius(50.0)
                             .fillColor(circleColor)
+                            .strokeWidth(0.2F)
                         googleMap.addCircle(circleOptions)
                     }
                 }

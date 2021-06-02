@@ -17,43 +17,46 @@ import com.example.beesafe.ui.auth.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
+    private lateinit var binding : ActivitySplashBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivitySplashBinding.inflate(layoutInflater)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (ContextCompat.checkSelfPermission(this@SplashActivity,
-                Manifest.permission.ACCESS_FINE_LOCATION) !==
-            PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this@SplashActivity,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-                ActivityCompat.requestPermissions(this@SplashActivity,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+        if (ContextCompat.checkSelfPermission(this@SplashActivity, Manifest.permission.ACCESS_FINE_LOCATION) !== PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this@SplashActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                ActivityCompat.requestPermissions(this@SplashActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
             } else {
-                ActivityCompat.requestPermissions(this@SplashActivity,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+                ActivityCompat.requestPermissions(this@SplashActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
             }
+        }else{
+            val fadein = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+            binding.splashText.startAnimation(fadein)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 3000)
         }
-
-        val fadein = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        binding.splashText.startAnimation(fadein)
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 3000)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
-                                            grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             1 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] ==
                     PackageManager.PERMISSION_GRANTED) {
-                    if ((ContextCompat.checkSelfPermission(this@SplashActivity,
-                            Manifest.permission.ACCESS_FINE_LOCATION) ===  PackageManager.PERMISSION_GRANTED)) {
+                    if ((ContextCompat.checkSelfPermission(this@SplashActivity, Manifest.permission.ACCESS_FINE_LOCATION) ===  PackageManager.PERMISSION_GRANTED)) {
                         Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+                        val fadein = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+                        binding.splashText.startAnimation(fadein)
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            val intent = Intent(this, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }, 3000)
                     }
                 } else {
                     Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
