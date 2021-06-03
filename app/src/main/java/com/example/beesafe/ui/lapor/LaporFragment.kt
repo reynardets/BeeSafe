@@ -114,7 +114,7 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
                 //get UID
                 val userID = mAuth.currentUser?.uid.toString()
                 postLapor(category, currentDate, description, userID, latitude, longitude)
-            }
+        }
         }
     }
 
