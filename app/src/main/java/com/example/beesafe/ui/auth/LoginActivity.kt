@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -57,15 +58,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 val email = binding.etEmailLogin.text.toString()
                 val password = binding.etPasswordLogin.text.toString()
                 if (email.isNotEmpty() && password.isNotEmpty()) {
+                    showLoading(true)
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                         if (it.isSuccessful) {
                             Toast.makeText(this, "Sign In Berhasil", Toast.LENGTH_SHORT).show()
+                            showLoading(false)
                             onAuthSuccessful(email)
                         } else {
                             Toast.makeText(this, "Sign In Gagal", Toast.LENGTH_SHORT).show()
+                            showLoading(false)
                         }
                     }
                 } else {
+                    showLoading(false)
                     Toast.makeText(this, "Email dan Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -89,6 +94,15 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             .addOnFailureListener {
                 Toast.makeText(this, "Sign In Gagal, $it", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.progressBar.playAnimation()
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
 
