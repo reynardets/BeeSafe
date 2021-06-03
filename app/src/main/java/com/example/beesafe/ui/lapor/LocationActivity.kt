@@ -55,6 +55,11 @@ class LocationActivity : AppCompatActivity() {
                 val cameraPosition = CameraPosition.Builder().target(position).zoom(15f).build()
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
+            //set marker to current location on open
+            googleMap.addMarker(MarkerOptions().position(LatLng(pref.getLatitude().toDouble(), pref.getLongitude().toDouble())).title("Tempat Kejadian"))
+            latitude = pref.getLatitude().toDouble()
+            longitude = pref.getLongitude().toDouble()
+
             googleMap.setOnMapClickListener {
                 googleMap.clear()
                 googleMap.addMarker(MarkerOptions().position(LatLng(it.latitude,it.longitude)).title("Tempat Kejadian"))
@@ -64,7 +69,7 @@ class LocationActivity : AppCompatActivity() {
         }
 
         binding.btnSetlocation.setOnClickListener {
-            val geocoder: Geocoder = Geocoder(this, Locale.getDefault())
+            val geocoder = Geocoder(this, Locale.getDefault())
             val addresses: List<Address>
             addresses = geocoder.getFromLocation(latitude, longitude, 1)
             val address = addresses[0].getAddressLine(0)

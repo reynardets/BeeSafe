@@ -23,7 +23,6 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -76,7 +75,10 @@ class HomeFragment : Fragment() {
                 val cameraPosition = CameraPosition.Builder().target(position).zoom(15f).build()
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
+
         }
+
+
     }
 
     private fun getNearbyReports(latitude: Double, longitude: Double) {
