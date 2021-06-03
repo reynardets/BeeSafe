@@ -36,4 +36,15 @@
     <string name="lokasi">Lokasi</string>
     <string name="lokasi_example">Jl. Mawar Merah no. 50</string>
     <string name="user">User</string>
+    <!--OnBoard-->
+    <string name="onBoard">Pergi dengan aman menggunakan peta kami. Peta akan selalu diperbaharui
+dengan laporan paling baru</string>
+    <string name="onBoard2">Satu tangan dapat membantu banyak orang.
+Dengan membuat laporan, kamu bisa
+mencegah orang lain mengalami kejadian
+buruk yang sama.</string>
+    <string name="onBoard3">Satu tangan dapat membantu banyak orang.
+Dengan membuat laporan, kamu bisa
+mencegah orang lain mengalami kejadian
+buruk yang sama.</string>
 </resources>

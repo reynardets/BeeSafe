@@ -104,6 +104,4 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             binding.progressBar.visibility = View.GONE
         }
     }
-
-
 }
