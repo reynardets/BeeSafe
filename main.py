@@ -102,5 +102,15 @@ def getReportsByLocation(latitude:float, longitude:float):
 
     return {"message":"success","data":data}
 
+@app.get('/user/{userId}/reports')
+async def getUserHistoryReports(userId: str):
+    doc_ref = db.collection(u'reports').where(u'userId', u'==',userId)
+    docs = doc_ref.stream()
 
+    data = [];
+
+    for doc in docs:
+        data.append(doc.to_dict())
+
+    return {"message":"success","data":data}
 
