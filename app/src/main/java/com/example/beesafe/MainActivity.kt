@@ -32,6 +32,4 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setupWithNavController(menu, navController)
     }
 
-
-
 }

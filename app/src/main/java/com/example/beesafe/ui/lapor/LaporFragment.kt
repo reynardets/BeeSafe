@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,6 @@ import com.example.beesafe.R
 import com.example.beesafe.api.APIConfig
 import com.example.beesafe.databinding.FragmentLaporBinding
 import com.example.beesafe.model.Reports
-import com.example.beesafe.ui.auth.LoginActivity
 import com.example.beesafe.utils.SharedPref
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -24,6 +24,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+
 
 class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -51,6 +52,8 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
         binding.btnLapor.setOnClickListener(this)
         binding.tvTanggal.setOnClickListener(this)
         binding.etLokasi.setOnClickListener(this)
+        binding.etLokasi.setMovementMethod(ScrollingMovementMethod())
+        binding.etDeskripsi.setMovementMethod(ScrollingMovementMethod())
     }
 
     private fun config() {
