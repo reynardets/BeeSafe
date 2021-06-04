@@ -1,5 +1,6 @@
 package com.example.beesafe.ui.lapor
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
@@ -134,11 +135,17 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
             }
 
             override fun onResponse(call: Call<Reports>, response: Response<Reports>) {
-                Toast.makeText(requireContext(), "Laporan Berhasil Dikirim", Toast.LENGTH_SHORT)
-                    .show()
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Laporan Berhasil Dikirim")
+                builder.setIcon(R.drawable.ic_warning)
+                builder.setMessage("Apabila anda memperlukan bantuan lebih, silahkan hubungi 129")
+                builder.setPositiveButton("OK"){dialog, which ->  }
+                val alertDialog = builder.create()
+                alertDialog.show()
                 binding.etDeskripsi.setText("")
             }
         })
+
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {

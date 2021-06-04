@@ -75,10 +75,7 @@ class HomeFragment : Fragment() {
                 val cameraPosition = CameraPosition.Builder().target(position).zoom(15f).build()
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             }
-
         }
-
-
     }
 
     private fun getNearbyReports(latitude: Double, longitude: Double) {
@@ -97,8 +94,7 @@ class HomeFragment : Fragment() {
                         builder.setTitle("Harap Berhati - Hati")
                         builder.setIcon(R.drawable.ic_warning)
                         builder.setMessage("Telah terjadi pelecehan seksual disekitar anda")
-                        builder.setNeutralButton("OK") { dialog, which ->
-                        }
+                        builder.setPositiveButton("OK"){dialog, which ->  }
                         val alertDialog = builder.create()
                         alertDialog.show()
                     }
