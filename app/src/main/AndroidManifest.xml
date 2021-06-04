@@ -22,7 +22,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${api_key}" />
 
-        <activity android:name=".ui.OnBoardActivity" />z
+        <activity android:name=".ui.OnBoardActivity" />
+        <activity android:name=".ui.akun.HistoryReportsActivity" />
         <activity android:name=".ui.lapor.LocationActivity" />
         <activity android:name=".ui.auth.RegisterActivity" />
         <activity android:name=".ui.auth.LoginActivity" />

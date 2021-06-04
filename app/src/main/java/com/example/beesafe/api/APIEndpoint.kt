@@ -3,10 +3,7 @@ package com.example.beesafe.api
 import com.example.beesafe.model.Reports
 import com.example.beesafe.model.remote.APIResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface APIEndpoint {
 
@@ -20,5 +17,10 @@ interface APIEndpoint {
     fun getNearbyReports(
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double
+    ): Call<APIResponse>
+
+    @GET("/user/{userId}/reports")
+    fun getUserHistoryReports(
+            @Path("userId") userId: String
     ): Call<APIResponse>
 }

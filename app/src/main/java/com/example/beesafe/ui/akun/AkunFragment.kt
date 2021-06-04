@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.beesafe.R
 import com.example.beesafe.databinding.FragmentAkunBinding
 import com.example.beesafe.ui.auth.LoginActivity
@@ -14,15 +13,10 @@ import com.example.beesafe.utils.SharedPref
 
 class AkunFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var akunViewModel: AkunViewModel
     private lateinit var binding: FragmentAkunBinding
     private lateinit var pref: SharedPref
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAkunBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -31,16 +25,19 @@ class AkunFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         config()
         binding.btnLogout.setOnClickListener(this)
+        binding.riwayatLaporan.setOnClickListener(this)
     }
 
     private fun config() {
-        akunViewModel = ViewModelProvider(this).get(AkunViewModel::class.java)
         pref = SharedPref(requireContext())
         binding.txtUser.text = pref.getUser().email
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.riwayatLaporan ->{
+                startActivity(Intent(view?.context, HistoryReportsActivity::class.java))
+            }
             R.id.btn_logout -> {
                 pref.clearUser()
                 startActivity(Intent(view?.context, LoginActivity::class.java))
