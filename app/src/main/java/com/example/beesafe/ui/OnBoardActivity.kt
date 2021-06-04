@@ -66,6 +66,11 @@ class OnBoardActivity : AppIntro() {
             unselectedIndicatorColor = getColor(R.color.young_orange)
         )
 
+        setNextArrowColor(getColor(R.color.dark_orange))
+        setColorDoneText(getColor(R.color.dark_orange))
+        isWizardMode = true
+        setImmersiveMode()
+
     }
     override fun onSkipPressed(currentFragment: Fragment?) {
         super.onSkipPressed(currentFragment)
