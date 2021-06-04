@@ -16,5 +16,6 @@
 
     <style name="DatePickerDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/dark_orange</item>
+        <item name="colorOnPrimary">@color/dark_orange</item>
     </style>
 </resources>

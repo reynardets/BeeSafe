@@ -110,7 +110,7 @@ class HomeFragment : Fragment() {
                         //Drawing Circle
                         val circleOptions = CircleOptions()
                             .center(LatLng(reports.location.latitude, reports.location.longitude))
-                            .radius(50.0)
+                            .radius(75.0)
                             .fillColor(circleColor)
                             .strokeWidth(0.2F)
                         googleMap.addCircle(circleOptions)
