@@ -14,7 +14,6 @@ import com.example.beesafe.utils.SharedPref
 
 class AkunFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var akunViewModel: AkunViewModel
     private lateinit var binding: FragmentAkunBinding
     private lateinit var pref: SharedPref
 
@@ -31,16 +30,19 @@ class AkunFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         config()
         binding.btnLogout.setOnClickListener(this)
+        binding.imgRiwayat.setOnClickListener(this)
     }
 
     private fun config() {
-        akunViewModel = ViewModelProvider(this).get(AkunViewModel::class.java)
         pref = SharedPref(requireContext())
         binding.txtUser.text = pref.getUser().email
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.img_riwayat ->{
+                startActivity(Intent(view?.context, HistoryReportsActivity::class.java))
+            }
             R.id.btn_logout -> {
                 pref.clearUser()
                 startActivity(Intent(view?.context, LoginActivity::class.java))
