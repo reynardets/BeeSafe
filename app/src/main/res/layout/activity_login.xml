@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.LoginActivity">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/progressBar"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_rawRes="@raw/splashscreen" />
+    
     <TextView
         android:id="@+id/txt_login"
         android:layout_width="wrap_content"
@@ -101,17 +112,6 @@
         app:layout_constraintBottom_toTopOf="@+id/goToRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/progressBar"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_rawRes="@raw/splashscreen" />
 
     <LinearLayout
         android:id="@+id/goToRegister"
