@@ -67,6 +67,7 @@ class OnBoardActivity : AppIntro() {
         )
 
         setNextArrowColor(getColor(R.color.dark_orange))
+        setBackArrowColor(getColor(R.color.dark_orange))
         setColorDoneText(getColor(R.color.dark_orange))
         isWizardMode = true
         setImmersiveMode()
