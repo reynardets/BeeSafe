@@ -34,7 +34,7 @@
     <string name="deskripsi">Deskripsi</string>
     <string name="deskripsi_text">Ini adalah deskripsi</string>
     <string name="lokasi">Lokasi</string>
-    <string name="lokasi_example">Jl. Mawar Merah no. 50</string>
+    <string name="lokasi_example"><i>Contoh : Jl. Mawar Merah no. 50</i></string>
     <string name="user">User</string>
     <!--OnBoard-->
     <string name="onBoard">Pergi dengan aman menggunakan peta kami. Peta akan selalu diperbaharui
