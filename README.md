@@ -42,7 +42,6 @@ Piorus Bangkit final project for Bangkit Capstone 2021.
 - [PySastrawi](https://pypi.org/project/Sastrawi/)
 - [SafeCity](https://github.com/swkarlekar/safecity)
 - [Tensorflow](tensorflow.org/)
-- 
 ## Related
 
 [BeeSafe API](https://github.com/raihanhaikal/beesafe_api)
