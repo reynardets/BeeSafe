@@ -20,6 +20,7 @@ import com.example.beesafe.model.Reports
 import com.example.beesafe.utils.SharedPref
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 import retrofit2.Callback
@@ -75,6 +76,7 @@ class LaporFragment : Fragment(), View.OnClickListener, DatePickerDialog.OnDateS
                 val month = calendar.get(Calendar.MONTH)
                 val year = calendar.get(Calendar.YEAR)
                 val datePickerDialog = DatePickerDialog(requireContext(), R.style.DatePickerDialog, this, year, month, day)
+                datePickerDialog.datePicker.maxDate = calendar.timeInMillis
                 datePickerDialog.show()
             }
             R.id.btn_lapor -> {
